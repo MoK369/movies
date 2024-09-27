@@ -181,7 +181,7 @@ class _SearchPageState extends BaseView<SearchPage> {
 
   void whenClearResultsClicked() {
     setState(() {
-      moviesSearchViewModel.viewState = LoadingState();
+      moviesSearchViewModel.clearAllSearchData();
       isSearchClicked = false;
       searchController.clear();
       FocusManager.instance.primaryFocus?.unfocus();

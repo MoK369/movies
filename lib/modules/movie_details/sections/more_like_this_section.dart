@@ -44,7 +44,7 @@ class _MoreLikeThisSectionState extends BaseView<MoreLikeThisSection> {
                   height: 10,
                 ),
                 SizedBox(
-                  height: size.height * 0.36,
+                  height: size.height * 0.4,
                   child: CustomViewModelConsumer<SimilarMoviesViewModel,
                       List<Result>>(
                     shimmerWidth: size.width,
@@ -64,11 +64,11 @@ class _MoreLikeThisSectionState extends BaseView<MoreLikeThisSection> {
                         itemCount: similarMovies.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(right: 20),
+                            padding: const EdgeInsets.only(right: 10),
                             child: PosterCard(
                               showBottomSection: true,
-                              posterWidth: size.width * 0.4,
-                              posterHeight: (size.width * 0.37) * (127 / 96),
+                              posterWidth: size.width * 0.37,
+                              posterHeight: (size.width * 0.35) * (127 / 96),
                               shimmerWidth: size.width * 0.05,
                               shimmerHeight: size.height * 0.015,
                               movie: similarMovies[index],

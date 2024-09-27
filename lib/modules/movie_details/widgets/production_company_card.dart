@@ -12,7 +12,7 @@ class ProductionCompanyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       decoration: BoxDecoration(
           color: Colors.white70,
           borderRadius: BorderRadius.circular(10),
@@ -22,7 +22,7 @@ class ProductionCompanyCard extends StatelessWidget {
         child: CustCachedNetworkImage(
             fit: BoxFit.contain,
             width: size.width * 0.35,
-            imageUrl: ImageUrl.getFullUrl(productionCompany.logoPath ?? "")),
+            imagePath: ImageUrl.getFullUrl(productionCompany.logoPath ?? "")),
       ),
     );
   }

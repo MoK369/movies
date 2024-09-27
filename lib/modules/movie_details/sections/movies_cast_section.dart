@@ -54,12 +54,12 @@ class _MoviesCastSectionState extends BaseView<MoviesCastSection> {
                         itemCount: castList.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: CastCard(
                                 cast: castList[index],
-                                profileImageWidth: size.width * 0.35,
+                                profileImageWidth: size.width * 0.33,
                                 profileImageHeight:
-                                    (size.width * 0.35) * (12 / 10)),
+                                    (size.width * 0.33) * (12 / 10)),
                           );
                         },
                       );

@@ -16,6 +16,7 @@ class MovieVoteNumberRow extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 3),
@@ -28,6 +29,7 @@ class MovieVoteNumberRow extends StatelessWidget {
           width: 5,
         ),
         Text(
+          textAlign: TextAlign.start,
           MovieVote.getVoteAverage(movieVoteNumber ?? 0),
           style: theme.textTheme.labelMedium!.copyWith(fontSize: voteFontSize),
         ),

@@ -67,12 +67,12 @@ class DetailsScreenProvider extends ChangeNotifier {
     if (videoKey != "" && await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      updateUrlErrorMessage("Failed To Launch URL❗");
+      updateUrlErrorMessage("Failed To Launch URL❗${DateTime.now()}");
     }
   }
 
   void updateUrlErrorMessage(String newMessage) {
-    launchingUrlErrorMessage = newMessage + DateTime.now().toString();
+    launchingUrlErrorMessage = newMessage;
     notifyListeners();
   }
 }

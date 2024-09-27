@@ -38,10 +38,13 @@ class _WatchListPageState extends BaseView<WatchListPage> {
                       "assets/animations/empty_list_animation.json",
                       height: size.height * 0.33),
                 ),
-                Text(
-                  textAlign: TextAlign.center,
-                  "No Movies Saved In Watch List",
-                  style: theme.textTheme.labelMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    "No Movies Saved In Watchlist",
+                    style: theme.textTheme.labelMedium,
+                  ),
                 )
               ],
             ),

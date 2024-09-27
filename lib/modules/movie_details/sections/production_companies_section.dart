@@ -19,52 +19,54 @@ class _ProductionCompaniesSectionState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      color: const Color(0xFF282A28).withOpacity(0.5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Production Companies:",
-            style: theme.textTheme.labelMedium,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: size.width,
-            height: (size.width * 0.35),
-            child: CustomViewModelConsumer<MovieDetailsViewModel,
-                MovieDetailsModel>(
-              shimmerWidth: size.width,
-              shimmerHeight: size.height * 3,
-              errorIconSize: 25,
-              successFunction: (successState) {
-                var productionCompanies =
-                    successState.data.productionCompanies ?? [];
-                if (productionCompanies.isEmpty) {
-                  showProductionCompaniesSection = false;
-                  WidgetsBinding.instance.addPostFrameCallback(
-                    (timeStamp) {
-                      setState(() {});
+    return !showProductionCompaniesSection
+        ? const SizedBox()
+        : Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            color: const Color(0xFF282A28).withOpacity(0.5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Production Companies:",
+                  style: theme.textTheme.labelMedium,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: size.width,
+                  height: (size.width * 0.35),
+                  child: CustomViewModelConsumer<MovieDetailsViewModel,
+                      MovieDetailsModel>(
+                    shimmerWidth: size.width,
+                    shimmerHeight: size.height * 3,
+                    errorIconSize: 25,
+                    successFunction: (successState) {
+                      var productionCompanies =
+                          successState.data.productionCompanies ?? [];
+                      if (productionCompanies.isEmpty) {
+                        showProductionCompaniesSection = false;
+                        WidgetsBinding.instance.addPostFrameCallback(
+                          (timeStamp) {
+                            setState(() {});
+                          },
+                        );
+                      }
+                      return ListView.builder(
+                        cacheExtent: 300,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: productionCompanies.length,
+                        itemBuilder: (context, index) {
+                          return ProductionCompanyCard(
+                              productionCompany: productionCompanies[index]);
+                        },
+                      );
                     },
-                  );
-                }
-                return ListView.builder(
-                  cacheExtent: 300,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productionCompanies.length,
-                  itemBuilder: (context, index) {
-                    return ProductionCompanyCard(
-                        productionCompany: productionCompanies[index]);
-                  },
-                );
-              },
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          );
   }
 }

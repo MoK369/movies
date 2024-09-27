@@ -13,13 +13,13 @@ import 'package:movies/modules/movie_details/widgets/total_duration.dart';
 import 'package:movies/modules/movie_details/widgets/volume_widget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class TrailerVideoWidget extends StatefulWidget {
+class TrailerVideoSection extends StatefulWidget {
   final Result movie;
   final Widget? widgetUnderTrailer;
   final DetailsScreenProvider detailsScreenProvider;
   final MovieTrailerViewModel movieTrailerViewModel;
 
-  const TrailerVideoWidget(
+  const TrailerVideoSection(
       {super.key,
       required this.movie,
       required this.movieTrailerViewModel,
@@ -27,10 +27,10 @@ class TrailerVideoWidget extends StatefulWidget {
       this.widgetUnderTrailer});
 
   @override
-  State<TrailerVideoWidget> createState() => _TrailerVideoWidgetState();
+  State<TrailerVideoSection> createState() => _TrailerVideoSectionState();
 }
 
-class _TrailerVideoWidgetState extends BaseView<TrailerVideoWidget> {
+class _TrailerVideoSectionState extends BaseView<TrailerVideoSection> {
   bool isPlayedClicked = false,
       isFullScreen = false,
       isControllerInitialized = false;
@@ -63,78 +63,84 @@ class _TrailerVideoWidgetState extends BaseView<TrailerVideoWidget> {
                       width: size.width,
                       height: size.height * 0.27,
                       fit: BoxFit.fill,
-                      imageUrl:
+                      imagePath:
                           ImageUrl.getFullUrl(widget.movie.backdropPath ?? "")),
                 ),
                 Image.asset("assets/icons/play-button_icon.png",
                     scale: 4, color: Colors.white.withOpacity(0.8))
               ],
             )
-          : CustomViewModelConsumer<MovieTrailerViewModel, VideoResult>(
-              shimmerWidth: size.width,
-              shimmerHeight: size.height * 0.25,
-              showTextErrorInsteadOfIconError: false,
-              successFunction: (successState) {
-                var trailer = successState.data;
-                initController(trailer.key ?? "");
-                return YoutubePlayerBuilder(
-                  player: YoutubePlayer(
-                    controller: youtubePlayerController,
-                    showVideoProgressIndicator: true,
-                    bottomActions: [
-                      SizedBox(
-                        height: 70,
-                        width: size.width * 0.95,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            children: [
-                              const ProgressBar(
-                                isExpanded: true,
-                                colors: ProgressBarColors(
-                                    handleColor: AppThemes.darkOnPrimaryColor,
-                                    playedColor: AppThemes.darkOnPrimaryColor),
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: size.width * 0.33,
-                                    child: VolumeWidget(
+          : SizedBox(
+              height: size.height * 0.27,
+              child:
+                  CustomViewModelConsumer<MovieTrailerViewModel, VideoResult>(
+                shimmerWidth: size.width,
+                shimmerHeight: size.height * 0.25,
+                showTextErrorInsteadOfIconError: false,
+                errorIconSize: 35,
+                successFunction: (successState) {
+                  var trailer = successState.data;
+                  initController(trailer.key ?? "");
+                  return YoutubePlayerBuilder(
+                    player: YoutubePlayer(
+                      controller: youtubePlayerController,
+                      showVideoProgressIndicator: true,
+                      bottomActions: [
+                        SizedBox(
+                          height: 70,
+                          width: size.width * 0.95,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                const ProgressBar(
+                                  isExpanded: true,
+                                  colors: ProgressBarColors(
+                                      handleColor: AppThemes.darkOnPrimaryColor,
+                                      playedColor:
+                                          AppThemes.darkOnPrimaryColor),
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: size.width * 0.33,
+                                      child: VolumeWidget(
+                                          youtubePlayerController:
+                                              youtubePlayerController),
+                                    ),
+                                    const Spacer(),
+                                    CurrentPosition(
+                                      controller: youtubePlayerController,
+                                    ),
+                                    const ImageIcon(
+                                      AssetImage(
+                                          "assets/icons/forward_slash_icon.png"),
+                                      color: Colors.white,
+                                    ),
+                                    TotalDuration(
                                         youtubePlayerController:
                                             youtubePlayerController),
-                                  ),
-                                  const Spacer(),
-                                  CurrentPosition(
-                                    controller: youtubePlayerController,
-                                  ),
-                                  const ImageIcon(
-                                    AssetImage(
-                                        "assets/icons/forward_slash_icon.png"),
-                                    color: Colors.white,
-                                  ),
-                                  TotalDuration(
-                                      youtubePlayerController:
-                                          youtubePlayerController),
-                                  const PlaybackSpeedButton(),
-                                  const FullScreenButton(),
-                                ],
-                              )
-                            ],
+                                    const PlaybackSpeedButton(),
+                                    const FullScreenButton(),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  builder: (context, player) {
-                    return Column(
-                      children: [
-                        player,
-                        widget.widgetUnderTrailer ?? const SizedBox(),
                       ],
-                    );
-                  },
-                );
-              },
+                    ),
+                    builder: (context, player) {
+                      return Column(
+                        children: [
+                          player,
+                          widget.widgetUnderTrailer ?? const SizedBox(),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
     );
   }

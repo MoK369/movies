@@ -47,7 +47,8 @@ class _TopSideSectionStackState extends BaseView<TopSideSectionStack> {
             child: CustCachedNetworkImage(
                 width: double.infinity,
                 height: size.height * 0.27,
-                imageUrl: ImageUrl.getFullUrl(widget.movie.backdropPath ?? "")),
+                imagePath: ImageUrl.getFullUrl(
+                    widget.movie.backdropPath ?? "")),
           ),
           Positioned(
               top: (size.height * 0.25) / 2.5,

@@ -39,7 +39,7 @@ class GenreCard extends StatelessWidget {
                           "assets/images/movie_genres.jpg",
                           fit: BoxFit.fill,
                           width: size.width * 0.43,
-                          height: (size.width * 0.3) * (190 / 125),
+                    height: (size.width * 0.25) * (190 / 125),
                         )
                       : SizedBox(
                           width: size.width * 0.43,
@@ -47,7 +47,7 @@ class GenreCard extends StatelessWidget {
                           child: Stack(
                             children: [
                               Positioned(
-                                top: 10,
+                                top: 0,
                                 right: 5,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -55,7 +55,7 @@ class GenreCard extends StatelessWidget {
                                       fit: BoxFit.fill,
                                       width: size.width * 0.25,
                                       height: (size.width * 0.25) * (190 / 125),
-                                      imageUrl:
+                                      imagePath:
                                           ImageUrl.getFullUrl(imageUrl![1])),
                                 ),
                               ),
@@ -65,7 +65,7 @@ class GenreCard extends StatelessWidget {
                                     fit: BoxFit.fill,
                                     width: size.width * 0.25,
                                     height: (size.width * 0.25) * (190 / 125),
-                                    imageUrl:
+                                    imagePath:
                                         ImageUrl.getFullUrl(imageUrl![0])),
                               ),
                             ],

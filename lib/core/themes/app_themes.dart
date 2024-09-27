@@ -43,5 +43,11 @@ class AppThemes {
               borderSide: const BorderSide(color: Colors.white, width: 1.2)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
-              borderSide: const BorderSide(color: Colors.white, width: 1.2))));
+              borderSide: const BorderSide(color: Colors.white, width: 1.2))),
+      snackBarTheme: SnackBarThemeData(
+          backgroundColor: darkOnPrimaryColor,
+          contentTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              color: darkPrimaryColor)));
 }

@@ -29,54 +29,54 @@ class _NewReleasesSectionState extends BaseView<NewReleasesSection> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomViewModelConsumer<UpcomingMoviesViewModel, List<Result>>(
-      shimmerWidth: size.width,
-      shimmerHeight: size.height * 0.2,
-      successFunction: (successState) {
-        var movies = successState.data;
-        return Container(
-          width: size.width,
-          height: (size.width * 0.5) * (125 / 95),
-          color: const Color(0xFF282A28),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("New Releases", style: theme.textTheme.labelMedium),
-                const SizedBox(
-                  height: 15,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: movies.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: PosterCard(
-                          movie: movies[index],
-                          posterWidth: size.width * 0.35,
-                          posterHeight: (size.width * 0.35) * (125 / 95),
-                          onPosterClick: () {
-                            Navigator.pushNamed(
-                                context, MovieDetailsScreen.routName,
-                                arguments: movies[index]);
-                          },
-                          onBookMarkClick: () {
-                            widget.popularMoviesViewModel
-                                .refreshDueToBookMarking(movies[index]);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+    return Container(
+      width: size.width,
+      height: (size.width * 0.49) * (125 / 95),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      color: const Color(0xFF282A28),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("New Releases", style: theme.textTheme.labelMedium),
+          const SizedBox(
+            height: 15,
+          ),
+          SizedBox(
+            height: (size.width * 0.36) * (125 / 95),
+            child:
+            CustomViewModelConsumer<UpcomingMoviesViewModel, List<Result>>(
+              shimmerWidth: size.width,
+              shimmerHeight: size.height * 0.2,
+              successFunction: (successState) {
+                var movies = successState.data;
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: PosterCard(
+                        movie: movies[index],
+                        posterWidth: size.width * 0.35,
+                        posterHeight: (size.width * 0.35) * (125 / 95),
+                        onPosterClick: () {
+                          Navigator.pushNamed(
+                              context, MovieDetailsScreen.routName,
+                              arguments: movies[index]);
+                        },
+                        onBookMarkClick: () {
+                          widget.popularMoviesViewModel
+                              .refreshDueToBookMarking(movies[index]);
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

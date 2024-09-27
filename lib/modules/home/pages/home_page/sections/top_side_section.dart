@@ -32,37 +32,42 @@ class _TopSideSectionState extends BaseView<TopSideSection> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomViewModelConsumer<PopularMoviesViewModel, List<Result>>(
-      shimmerWidth: double.infinity,
-      shimmerHeight: size.height * 0.36,
-      successFunction: (successState) {
-        var movies = successState.data;
-        precacheMoviesImages(movies);
-        return Column(
-          children: [
-            CarouselSlider.builder(
-                itemCount: successState.data.length,
-                itemBuilder: (context, index, realIndex) {
-                  return TopSideSectionStack(
-                    movie: movies[index],
-                    onBookMarkClick: () {
-                      widget.upcomingMoviesViewModel
-                          .refreshDueToBookMarking(movies[index]);
-                    },
-                  );
-                },
-                options: CarouselOptions(
-                    autoPlay: true,
-                    pauseAutoPlayOnManualNavigate: true,
-                    autoPlayInterval: const Duration(seconds: 15),
-                    autoPlayAnimationDuration: const Duration(seconds: 3),
-                    autoPlayCurve: Curves.easeInOut,
-                    height: size.height * 0.4,
-                    viewportFraction: 1,
-                    initialPage: 0)),
-          ],
-        );
-      },
+    return SizedBox(
+      height: size.height * 0.42,
+      child: CustomViewModelConsumer<PopularMoviesViewModel, List<Result>>(
+        shimmerWidth: double.infinity,
+        shimmerHeight: size.height * 0.36,
+        showTextErrorInsteadOfIconError: false,
+        errorIconSize: 35,
+        successFunction: (successState) {
+          var movies = successState.data;
+          precacheMoviesImages(movies);
+          return Column(
+            children: [
+              CarouselSlider.builder(
+                  itemCount: successState.data.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return TopSideSectionStack(
+                      movie: movies[index],
+                      onBookMarkClick: () {
+                        widget.upcomingMoviesViewModel
+                            .refreshDueToBookMarking(movies[index]);
+                      },
+                    );
+                  },
+                  options: CarouselOptions(
+                      autoPlay: true,
+                      pauseAutoPlayOnManualNavigate: true,
+                      autoPlayInterval: const Duration(seconds: 15),
+                      autoPlayAnimationDuration: const Duration(seconds: 3),
+                      autoPlayCurve: Curves.easeInOut,
+                      height: size.height * 0.4,
+                      viewportFraction: 1,
+                      initialPage: 0)),
+            ],
+          );
+        },
+      ),
     );
   }
 

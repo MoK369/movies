@@ -4,13 +4,13 @@ import 'package:movies/core/bases/base_view_state.dart';
 import 'package:movies/core/models/result.dart';
 import 'package:movies/core/themes/app_themes.dart';
 import 'package:movies/core/view_models/api_view_models/movie_credits_view_model.dart';
-import 'package:movies/modules/home/pages/home_page/widgets/trailer_video_widget.dart';
 import 'package:movies/modules/movie_details/sections/date_rate_runtime_section.dart';
 import 'package:movies/modules/movie_details/sections/more_like_this_section.dart';
 import 'package:movies/modules/movie_details/sections/movie_description_section.dart';
 import 'package:movies/modules/movie_details/sections/movies_cast_section.dart';
 import 'package:movies/modules/movie_details/sections/production_companies_section.dart';
 import 'package:movies/modules/movie_details/sections/title_and_link_section.dart';
+import 'package:movies/modules/movie_details/sections/trailer_video_section.dart';
 import 'package:provider/provider.dart';
 
 import 'manager/details_screen_provider.dart';
@@ -138,49 +138,55 @@ class _MovieDetailsScreenState extends BaseView<MovieDetailsScreen> {
                           title: Text(widget.movie.title ?? ""),
                           centerTitle: true,
                         ),
-                  body: ListView(
-                    children: [
-                      TrailerVideoWidget(
-                        movieTrailerViewModel:
-                            detailsScreenProvider.movieTrailerViewModel,
-                        detailsScreenProvider: detailsScreenProvider,
-                        movie: widget.movie,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 15),
-                        child: Column(
-                          children: [
-                            TitleAndLinkSection(
-                              movieTitle: widget.movie.title,
-                              onTitleLongPress: (videoResult) {
-                                detailsScreenProvider.openYoutubeVideoLink(
-                                    videoResult.key ?? "");
-                              },
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            DateRateRuntimeSection(
-                                movieReleaseDate: widget.movie.releaseDate),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 25),
-                              child:
-                                  MovieDescriptionSection(movie: widget.movie),
-                            ),
-                            MoviesCastSection(),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 40),
-                              child: ProductionCompaniesSection(),
-                            ),
-                            MoreLikeThisSection(
-                                movieId: widget.movie.id ?? 0,
-                                similarMoviesViewModel: detailsScreenProvider
-                                    .similarMoviesViewModel),
-                          ],
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TrailerVideoSection(
+                          movieTrailerViewModel:
+                              detailsScreenProvider.movieTrailerViewModel,
+                          detailsScreenProvider: detailsScreenProvider,
+                          movie: widget.movie,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 15),
+                          child: Column(
+                            children: [
+                              TitleAndLinkSection(
+                                movieTitle: widget.movie.title,
+                                onTitleLongPress: (videoResult) {
+                                  detailsScreenProvider.openYoutubeVideoLink(
+                                      videoResult.key ?? "");
+                                },
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              DateRateRuntimeSection(
+                                movieReleaseDate: widget.movie.releaseDate,
+                                movieVote: widget.movie.voteAverage,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 10, bottom: 30),
+                                child: MovieDescriptionSection(
+                                    movie: widget.movie),
+                              ),
+                              MoviesCastSection(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 40),
+                                child: ProductionCompaniesSection(),
+                              ),
+                              MoreLikeThisSection(
+                                  movieId: widget.movie.id ?? 0,
+                                  similarMoviesViewModel: detailsScreenProvider
+                                      .similarMoviesViewModel),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

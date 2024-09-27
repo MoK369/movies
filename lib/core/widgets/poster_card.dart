@@ -59,8 +59,7 @@ class _PosterCardState extends BaseView<PosterCard> {
                     fit: BoxFit.fill,
                     width: widget.posterWidth,
                     height: widget.posterHeight,
-                    imageUrl:
-                        ImageUrl.getFullUrl(widget.movie.posterPath ?? ""),
+                    imagePath: widget.movie.posterPath,
                   ),
                 )
               : Column(
@@ -73,7 +72,7 @@ class _PosterCardState extends BaseView<PosterCard> {
                         fit: BoxFit.fill,
                         width: widget.posterWidth,
                         height: widget.posterHeight,
-                        imageUrl:
+                        imagePath:
                             ImageUrl.getFullUrl(widget.movie.posterPath ?? ""),
                       ),
                     ),
@@ -115,28 +114,26 @@ class _PosterCardState extends BaseView<PosterCard> {
                     )
                   ],
                 ),
-          Positioned(
-            left: -2,
-            child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: widget.onBookMarkClick == null
-                    ? () {
-                        whenBookMarkClicked();
-                      }
-                    : () {
-                        whenBookMarkClicked();
-                        widget.onBookMarkClick!();
-                      },
-                icon: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    !isBookMarked
-                        ? "assets/icons/bookmark.png"
-                        : "assets/icons/saved_mark.png",
-                    width: size.width * 0.11,
-                  ),
-                )),
-          )
+          IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: widget.onBookMarkClick == null
+                  ? () {
+                whenBookMarkClicked();
+              }
+                  : () {
+                whenBookMarkClicked();
+                widget.onBookMarkClick!();
+                setState(() {});
+              },
+              icon: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  !isBookMarked
+                      ? "assets/icons/bookmark.png"
+                      : "assets/icons/saved_mark.png",
+                  width: size.width * 0.11,
+                ),
+              ))
         ],
       ),
     );
@@ -157,7 +154,6 @@ class _PosterCardState extends BaseView<PosterCard> {
           showInfoAlertDialog(titleText: result.message);
       }
     }
-    setState(() {});
   }
 
   void checkIsBookMarkedOrNot() {

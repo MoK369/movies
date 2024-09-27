@@ -16,7 +16,13 @@ class MoviesSearchViewModel extends BaseViewModel<List<Result>> {
   int? totalPagesNumber, totalResults;
 
   Future<void> searchForMovies(String query) async {
-    currentQuery = query;
+    if (currentQuery == "") {
+      currentQuery = query;
+    }
+    if (currentQuery != query) {
+      clearAllSearchData();
+      currentQuery = query;
+    }
     var result = await ApiManager.searchForMovies(
         query: currentQuery, pageNumber: currentPageNumber);
     switch (result) {
@@ -52,5 +58,13 @@ class MoviesSearchViewModel extends BaseViewModel<List<Result>> {
 
   bool didReachLastPage() {
     return currentPageNumber >= (totalPagesNumber ?? 0);
+  }
+
+  void clearAllSearchData() {
+    viewState = LoadingState();
+    currentQuery = "";
+    _searchedMoviesList.clear();
+    currentPageNumber = 1;
+    totalResults = totalPagesNumber = null;
   }
 }

@@ -27,53 +27,53 @@ class _RecommendedSectionState extends BaseView<RecommendedSection> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomViewModelConsumer<TopRatedMoviesViewModel, List<Result>>(
-      shimmerWidth: size.width,
-      shimmerHeight: size.height * 0.2,
-      successFunction: (successState) {
-        var movies = successState.data;
-        return Container(
-          width: size.width,
-          height: (size.width * 0.68) * (127 / 96),
-          color: const Color(0xFF282A28),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Recommended", style: theme.textTheme.labelMedium),
-                const SizedBox(
-                  height: 15,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: movies.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: PosterCard(
-                          showBottomSection: true,
-                          posterWidth: size.width * 0.35,
-                          posterHeight: (size.width * 0.35) * (127 / 96),
-                          shimmerWidth: size.width * 0.05,
-                          shimmerHeight: size.height * 0.015,
-                          movie: movies[index],
-                          onPosterClick: () {
-                            Navigator.pushNamed(
-                                context, MovieDetailsScreen.routName,
-                                arguments: movies[index]);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+    return Container(
+      width: size.width,
+      height: (size.width * 0.67) * (127 / 96),
+      color: const Color(0xFF282A28),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Recommended", style: theme.textTheme.labelMedium),
+          const SizedBox(
+            height: 15,
+          ),
+          SizedBox(
+            height: (size.width * 0.54) * (127 / 96),
+            child:
+            CustomViewModelConsumer<TopRatedMoviesViewModel, List<Result>>(
+              shimmerWidth: size.width,
+              shimmerHeight: size.height * 0.2,
+              successFunction: (successState) {
+                var movies = successState.data;
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: PosterCard(
+                        showBottomSection: true,
+                        posterWidth: size.width * 0.35,
+                        posterHeight: (size.width * 0.35) * (127 / 96),
+                        shimmerWidth: size.width * 0.05,
+                        shimmerHeight: size.height * 0.015,
+                        movie: movies[index],
+                        onPosterClick: () {
+                          Navigator.pushNamed(
+                              context, MovieDetailsScreen.routName,
+                              arguments: movies[index]);
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

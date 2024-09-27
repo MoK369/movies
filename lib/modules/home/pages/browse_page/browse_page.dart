@@ -60,7 +60,8 @@ class _BrowsePageState extends BaseView<BrowsePage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 125 / 175,
+                                childAspectRatio: 125 / 155,
+
                                 crossAxisSpacing: 10,
                                 mainAxisSpacing: 40),
                         itemBuilder: (context, index) {

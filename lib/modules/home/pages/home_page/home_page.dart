@@ -28,52 +28,30 @@ class _HomePageState extends BaseView<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => popularMoviesViewModel),
-        ChangeNotifierProvider(create: (context) => upcomingMoviesViewModel),
-        ChangeNotifierProvider(create: (context) => topRatedMoviesViewModel),
-      ],
-      child: Consumer3<PopularMoviesViewModel, UpcomingMoviesViewModel,
-          TopRatedMoviesViewModel>(
-        builder: (context, popularMoviesViewModel, upcomingMoviesViewModel,
-            topRatedMoviesViewModel, child) {
-          if (popularMoviesViewModel.viewState is ErrorState &&
-              upcomingMoviesViewModel.viewState is ErrorState &&
-              topRatedMoviesViewModel.viewState is ErrorState) {
-            ErrorState state = popularMoviesViewModel.viewState as ErrorState;
-            return Expanded(
-                child: Center(
-                    child: Text(
-              ApiErrorMessage.getErrorMessage(
-                  serverError: state.serverError, codeError: state.codeError),
-              style: theme.textTheme.labelMedium,
-            )));
-          } else {
-            return ListView(
-              children: [
-                Column(
-                  children: [
-                    TopSideSection(
-                      popularMoviesViewModel: popularMoviesViewModel,
-                      upcomingMoviesViewModel: upcomingMoviesViewModel,
-                    ),
-                    NewReleasesSection(
-                      upcomingMoviesViewModel: upcomingMoviesViewModel,
-                      popularMoviesViewModel: popularMoviesViewModel,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    RecommendedSection(
-                      topRatedMoviesViewModel: topRatedMoviesViewModel,
-                    )
-                  ],
-                ),
-              ],
-            );
-          }
-        },
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(create: (context) => popularMoviesViewModel),
+          ChangeNotifierProvider(create: (context) => upcomingMoviesViewModel),
+          ChangeNotifierProvider(create: (context) => topRatedMoviesViewModel),
+        ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TopSideSection(
+                popularMoviesViewModel: popularMoviesViewModel,
+                upcomingMoviesViewModel: upcomingMoviesViewModel,
+              ),
+              NewReleasesSection(
+                upcomingMoviesViewModel: upcomingMoviesViewModel,
+                popularMoviesViewModel: popularMoviesViewModel,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              RecommendedSection(
+                topRatedMoviesViewModel: topRatedMoviesViewModel,
+              )
+            ],
+          ),
+        ));
   }
 }
