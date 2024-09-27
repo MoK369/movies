@@ -1,0 +1,12 @@
+flutter_native_splash:
+  android: true
+  ios: true
+
+  color: "#121312"
+  image: assets/images/movies_logo.png
+  branding: assets/images/branding_logo.png
+
+  android_12:
+    color: "#121312"
+    image: assets/images/movies_logo_android12.png
+    branding: assets/images/branding_logo_android12.png
