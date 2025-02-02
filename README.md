@@ -17,3 +17,20 @@ Welcome to Movies Application, your ultimate destination for all things movies! 
 ## Record Of The App:
 
 https://drive.google.com/drive/folders/12dZ_n89PWeJYi0kVrnCQANqpjT_bGfko?usp=sharing
+
+## Pictures:
+
+![WhatsApp Image 2025-02-02 at 12 11 38](https://github.com/user-attachments/assets/521d0f3c-951a-428a-a401-c0f214220581)
+
+![WhatsApp Image 2025-02-02 at 12 11 39](https://github.com/user-attachments/assets/e1f56f19-a27a-49e1-b58b-2e6ab58a8718)
+
+![WhatsApp Image 2025-02-02 at 12 11 39 (4)](https://github.com/user-attachments/assets/e53ac5f0-eca8-45c2-bc6b-63dc1a82f149)
+
+![WhatsApp Image 2025-02-02 at 12 11 39 (1)](https://github.com/user-attachments/assets/12057c22-1e5d-40e1-a4a1-a552af2c2abc)
+
+![WhatsApp Image 2025-02-02 at 12 11 39 (2)](https://github.com/user-attachments/assets/0a6517a6-1718-4d98-8895-a4f6b4f88714)
+
+![WhatsApp Image 2025-02-02 at 12 11 39 (3)](https://github.com/user-attachments/assets/4ebf65c4-d142-44e5-bae8-08de108c9e3d)
+
+
+
