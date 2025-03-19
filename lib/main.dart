@@ -7,6 +7,7 @@ import 'package:movies/core/database/hive/adapters/defined_color_adapter.dart';
 import 'package:movies/core/models/result.dart';
 import 'package:movies/core/routes/route_generator/route_generator.dart';
 import 'package:movies/core/themes/app_themes.dart';
+import 'package:movies/core/widgets/custom_error_widget.dart';
 import 'package:movies/modules/home/home_screen.dart';
 
 Future<void> main() async {
@@ -53,6 +54,12 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.dark,
+      builder: (context, child) {
+        ErrorWidget.builder = (errorDetails) {
+          return CustomErrorWidget();
+        };
+        return child!;
+      },
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: HomeScreen.routeName,
     );

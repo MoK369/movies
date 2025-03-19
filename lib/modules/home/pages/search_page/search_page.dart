@@ -23,7 +23,6 @@ class _SearchPageState extends BaseView<SearchPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     moviesSearchViewModel.initReachingEndOfScrollListener();
   }

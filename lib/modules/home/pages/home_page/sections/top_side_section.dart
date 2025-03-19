@@ -64,6 +64,25 @@ class _TopSideSectionState extends BaseView<TopSideSection> {
                       height: size.height * 0.4,
                       viewportFraction: 1,
                       initialPage: 0)),
+              // Todo: try to use ListView instead of CarouselSlider to get the benefits of cacheExtent
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: movies.length,
+              //     itemExtent: size.width,
+              //     scrollDirection: Axis.horizontal,
+              //     cacheExtent: size.width * 6,
+              //     physics: PageScrollPhysics(),
+              //     itemBuilder: (context, index) {
+              //             return TopSideSectionStack(
+              //               movie: movies[index],
+              //               onBookMarkClick: () {
+              //                 widget.upcomingMoviesViewModel
+              //                     .refreshDueToBookMarking(movies[index]);
+              //               },
+              //             );
+              //     },
+              //   ),
+              // )
             ],
           );
         },
@@ -73,12 +92,12 @@ class _TopSideSectionState extends BaseView<TopSideSection> {
 
   void precacheMoviesImages(List<Result> movies) {
     for (var movie in movies) {
-      if (movie.posterPath != null || movie.posterPath != "") {
+      if (movie.posterPath != null && movie.posterPath != "") {
         precacheImage(
             CachedNetworkImageProvider(ImageUrl.getFullUrl(movie.posterPath!)),
             context);
       }
-      if (movie.backdropPath != null || movie.backdropPath != "") {
+      if (movie.backdropPath != null && movie.backdropPath != "") {
         precacheImage(
             CachedNetworkImageProvider(
                 ImageUrl.getFullUrl(movie.backdropPath!)),

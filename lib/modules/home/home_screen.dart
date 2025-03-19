@@ -81,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         label: "WATCHLIST"),
                   ]),
               body: PageView(
+                physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (value) {
                   setState(() {
                     currentBarItemIndex = value;
