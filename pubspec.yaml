@@ -56,6 +56,7 @@ dependencies:
   youtube_player_flutter: ^9.1.0
   #animations
   lottie: ^3.2.0
+  rive: ^0.13.20
   #color palette
   palette_generator: ^0.3.3+4
   #hive database
